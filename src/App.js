@@ -1,51 +1,46 @@
-
-import './App.css';
 import React, { useState } from 'react';
 
 function App() {
   const [nombreUsuario, setNombreUsuario] = useState('');
-  // const [puntPc, setPuntPc] = useState(0);
-  // const [puntUsuario, setPuntUsuario] = useState(0);
   const [resultText, setResultText] = useState('');
   const [pc, setPc] = useState('');
-  const [puntaje1, setPuntaje1] = useState(0);
-  const [puntaje2, setPuntaje2] = useState(0);
+  let [puntaje1, setPuntaje1] = useState(0);
+  let [puntaje2, setPuntaje2] = useState(0);
+  let [i, setI] = useState(1);
 
- 
-  // const inputUsuario = document.getElementById('inputUsuario');
   const usuarioDiv = document.getElementById('usuarioDiv');
   const textInicio = document.getElementById('textInicio');
   const seleccionDiv = document.getElementById('seleccion');
   const piedraBot = document.getElementById('piedraBot');
   const papelBot = document.getElementById('papelBot');
   const tijeraBot = document.getElementById('tijeraBot');
+  const inputUsuario = document.getElementById('inputUsuario');
 
   function Incrementpc(){
-  setPuntaje1((prev) => prev + 1); 
+  setPuntaje1(puntaje1=puntaje1 + 1); 
+
 }
   function IncrementUser(){
-    setPuntaje2((prev) => prev + 1);
+    setPuntaje2(puntaje2=puntaje2 + 1);
+    
   }
 
   
   const calcularResult = (eleccionUsuario, jug2) => {
     if (eleccionUsuario === jug2) {
       setResultText('Empate');
-      console.log(puntaje1, " ", puntaje2)
+     console.log(i);
     } else if (
       (eleccionUsuario === 'piedra' && jug2 === 'papel') ||
       (eleccionUsuario === 'tijeras' && jug2 === 'piedra') ||
       (eleccionUsuario === 'papel' && jug2 === 'tijeras')
     ) {
-      console.log(puntaje1, " ", puntaje2)
       Incrementpc();
       setResultText('Punto para la máquina');
+      console.log(i);
        detener();
-       if (puntaje1 === 3) {
-         piedraBot.disabled = true;
-         papelBot.disabled = true;
-         tijeraBot.disabled = true;
-       }
+       
+
     } else if (
       (eleccionUsuario === 'papel' && jug2 === 'piedra') ||
       (eleccionUsuario === 'piedra' && jug2 === 'tijeras') ||
@@ -53,13 +48,9 @@ function App() {
     ) {
       IncrementUser();
       setResultText(`Punto para ${nombreUsuario}`);
-  
+      console.log(i);
        detener();
-       if (puntaje2 === 3) {
-         piedraBot.disabled = true;
-         papelBot.disabled = true;
-        tijeraBot.disabled = true;
-      }
+        
     }
   };
 
@@ -79,11 +70,19 @@ function App() {
   };
 
   function detener(){
+    console.log(i)
     if (puntaje1 === 3) {
       setResultText('Mala suerte, gana la máquina.');
+      piedraBot.disabled = true;
+      papelBot.disabled = true;
+     tijeraBot.disabled = true;
     } else if (puntaje2 === 3) {
       setResultText(`Felicitaciones ${nombreUsuario}, ¡Tú ganas!!`);
+       piedraBot.disabled = true;
+         papelBot.disabled = true;
+        tijeraBot.disabled = true;
     }
+     
   };  
 
   const handleKeyDown = (event) => {
@@ -97,29 +96,38 @@ function App() {
       if (nombreUsuario === '') {
         alert('Ingrese su nombre');
       } else {
-        usuarioDiv.style.display = 'none';
+        
         textInicio.innerHTML = `¡Hola ${nombreUsuario}! Selecciona una opción.`;
 
         piedraBot.addEventListener('click', () => {
           calcularResult('piedra', obtenerJugadaComputadora());
+          setI(i=i+1);
+          
         });
 
         papelBot.addEventListener('click', () => {
           calcularResult('papel', obtenerJugadaComputadora());
+          setI(i=i+1);
+           
         });
 
         tijeraBot.addEventListener('click', () => {
           calcularResult('tijeras', obtenerJugadaComputadora());
+          setI(i=i+1);
+          
         });
 
         seleccionDiv.style.display = 'block';
         textInicio.style.display = 'block';
+        inputUsuario.style.display = 'none';
+        usuarioDiv.style.display = 'none';
       }
     }
   };
 
   return (
     <div>
+    <div><p id="usuarioDiv">El juego es al mejor de tres. <br/>Ingresa tu nombre:</p></div>
       <input
         id="inputUsuario"
         type="text"
@@ -137,8 +145,9 @@ function App() {
       <div id="textInicio"></div>
       <div id="resultText">{resultText}</div>
       <div id="pc" dangerouslySetInnerHTML={{ __html: pc }}></div>
-      <div id="puntaje1">pc: {puntaje1}</div>
-      <div id="puntaje2">{nombreUsuario}: {puntaje2}</div>
+      <div id="puntaje1" display='none'>pc: {puntaje1}</div>
+      <div id="puntaje2" display= 'none'>{nombreUsuario}: {puntaje2}</div>
+      <div id="refresh"><button id="refBoton" onClick={() => window.location.reload()}>Reiniciar</button></div>
     </div>
   );
 }
