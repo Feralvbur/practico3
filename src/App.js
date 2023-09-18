@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import papel from './componentes/images/papel.png'
+import piedra from './componentes/images/piedra.png'
+import tijera from './componentes/images/tijera.png'
 
 function App() {
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [resultText, setResultText] = useState('');
-  const [pc, setPc] = useState('');
+  let [pc, setPc] = useState('');
   let [puntaje1, setPuntaje1] = useState(0);
   let [puntaje2, setPuntaje2] = useState(0);
   let [i, setI] = useState(1);
@@ -58,13 +61,13 @@ function App() {
     const numeroAleatorio = Math.floor(Math.random() * 3);
 
     if (numeroAleatorio === 0) {
-      setPc('<img src="piedra.png" alt="Piedra" />');
+      setPc('eleccion de la pc: piedra');
       return 'piedra';
     } else if (numeroAleatorio === 1) {
-      setPc('<img src="papel.png" alt="Papel" />');
+      setPc('eleccion de la pc: papel');
       return 'papel';
     } else {
-      setPc('<img src="tijera.png" alt="Tijeras" />');
+      setPc('eleccion de la pc: tijeras');
       return 'tijeras';
     }
   };
@@ -138,9 +141,9 @@ function App() {
         {/* Renderizar aquí los elementos relevantes */}
       </div>
       <div id="seleccion">
-        <button id="piedraBot">piedra</button>
-        <button id="papelBot">Papel</button>
-        <button id="tijeraBot">Tijeras</button>
+        <button id="piedraBot"><img src={piedra}/></button>
+        <button id="papelBot"><img src={papel}/></button>
+        <button id="tijeraBot"><img src={tijera}/></button>
       </div>
       <div id="textInicio"></div>
       <div id="resultText">{resultText}</div>

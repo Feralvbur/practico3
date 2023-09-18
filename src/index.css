@@ -1,8 +1,51 @@
 body {
+  display: flex;
+  justify-content: center;
   background-color: #282c34;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+#usuarioDiv{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+  font-size: x-large;
+}
+#seleccion{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#piedraBot{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+#papelBot{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+ 
+}
+
+#tijeraBot{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+#puntaje1,#puntaje2{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#resultText{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#textInicio{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
